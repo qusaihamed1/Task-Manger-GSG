@@ -13,18 +13,17 @@ function addTask() {
   }
 
   if (isEditing) {
-    // Update the task description
     const task = taskList.find((t) => t.id === editingTaskId);
     if (task) {
       task.description = description;
-      highlightTask(task.id); // Highlight the updated task
+      highlightTask(task.id); 
     }
     isEditing = false;
     editingTaskId = null;
     document.querySelector("button.add-task-btn").textContent = "Add Task";
-    document.querySelector("button.cancel-btn").style.display = "none"; // Hide cancel button
+    document.querySelector("button.cancel-btn").style.display = "none"; 
   } else {
-    // Add new task
+
     taskList.push({
       id: currentId,
       description: description,
@@ -33,13 +32,13 @@ function addTask() {
     currentId++;
   }
 
-  taskInput.value = ""; // Clear input
-  displayTasks(); // Refresh tasks
+  taskInput.value = ""; 
+  displayTasks(); 
 }
 
 function displayTasks() {
   const taskListElement = document.getElementById("taskList");
-  taskListElement.innerHTML = ""; // Clear previous tasks
+  taskListElement.innerHTML = ""; 
 
   taskList.forEach((task) => {
     const taskItem = document.createElement("li");
@@ -78,14 +77,11 @@ function editTask(id) {
     isEditing = true;
     editingTaskId = id;
 
-    // Change button text to "Update Task" and show the cancel button
     document.querySelector("button.add-task-btn").textContent = "Update Task";
     document.querySelector("button.cancel-btn").style.display = "inline-block";
 
-    // Highlight the task being edited
     highlightTask(id);
 
-    // Scroll to the task being edited for better user experience
     document.getElementById("taskList").scrollIntoView({ behavior: "smooth" });
   }
 }
@@ -95,19 +91,18 @@ function cancelEdit() {
   editingTaskId = null;
   document.getElementById("taskInput").value = "";
   document.querySelector("button.add-task-btn").textContent = "Add Task";
-  document.querySelector("button.cancel-btn").style.display = "none"; // Hide cancel button
+  document.querySelector("button.cancel-btn").style.display = "none"; 
 }
 
 function highlightTask(id) {
   const taskListElement = document.getElementById("taskList");
   const taskItems = taskListElement.querySelectorAll("li");
 
-  taskItems.forEach((item) => item.classList.remove("highlight")); // Remove previous highlights
-
-  const taskItem = taskItems[id - 1]; // Select the updated task by id
+  taskItems.forEach((item) => item.classList.remove("highlight")); 
+  const taskItem = taskItems[id - 1]; 
   if (taskItem) {
-    taskItem.classList.add("highlight"); // Highlight the updated task
-    setTimeout(() => taskItem.classList.remove("highlight"), 2000); // Remove highlight after 2 seconds
+    taskItem.classList.add("highlight"); 
+    setTimeout(() => taskItem.classList.remove("highlight"), 2000); 
   }
 }
 
@@ -120,7 +115,7 @@ function searchTask() {
   );
 
   const taskListElement = document.getElementById("taskList");
-  taskListElement.innerHTML = ""; // Clear previous tasks
+  taskListElement.innerHTML = ""; 
 
   filteredTasks.forEach((task) => {
     const taskItem = document.createElement("li");
